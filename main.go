@@ -80,13 +80,13 @@ func updateMovie(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	r := mux.NewRouter()
-	movies = append(movies, Movie{ID: 1, Isbn: "123431", Title: "test movie 1", Director: &Director{Firstname: "some", Lastname: "one"}})
-	movies = append(movies, Movie{ID: 2, Isbn: "1313123", Title: "test movie 2", Director: &Director{Firstname: "Mister", Lastname: "movie"}})
-	r.HandleFunc("/movies", getMovies).Method("GET")
-	r.HandleFunc("/movies/{id}", getMovie).Method("GET")
-	r.HandleFunc("/movies", createMovie).Method("POST")
-	r.HandleFunc("/movies/{id}", updateMovie).Method("PUT")
-	r.HandleFunc("/movies", deleteMovie).Method("DELETE")
+	movies = append(movies, Movie{ID: "1", Isbn: "123431", Title: "test movie 1", Director: &Director{Firstname: "some", Lastname: "one"}})
+	movies = append(movies, Movie{ID: "2", Isbn: "1313123", Title: "test movie 2", Director: &Director{Firstname: "Mister", Lastname: "movie"}})
+	r.HandleFunc("/movies", getMovies).Methods("GET")
+	r.HandleFunc("/movies/{id}", getMovie).Methods("GET")
+	r.HandleFunc("/movies", createMovie).Methods("POST")
+	r.HandleFunc("/movies/{id}", updateMovie).Methods("PUT")
+	r.HandleFunc("/movies/{id}", deleteMovie).Methods("DELETE")
 	fmt.Printf("Starting server at port 8000\n")
 	log.Fatal(http.ListenAndServe(":8000", r))
 }
